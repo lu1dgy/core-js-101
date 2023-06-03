@@ -39,7 +39,7 @@ Rectangle.prototype.getArea = function () {
  *    { width: 10, height : 20 } => '{"height":10,"width":20}'
  */
 function getJSON(obj) {
-  JSON.stringify(obj);
+  return JSON.stringify(obj);
 }
 
 /**
@@ -53,8 +53,8 @@ function getJSON(obj) {
  *    const r = fromJSON(Circle.prototype, '{"radius":10}');
  *
  */
-function fromJSON(/* proto, json */) {
-  throw new Error('Not implemented');
+function fromJSON(proto, json) {
+  return new proto.constructor(...Object.values(JSON.parse(json)));
 }
 
 /**

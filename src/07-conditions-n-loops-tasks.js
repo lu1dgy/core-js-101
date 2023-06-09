@@ -159,8 +159,14 @@ function doRectanglesOverlap(/* rect1, rect2 */) {
  *   { center: { x:0, y:0 }, radius:10 },  { x:10, y:10 }   => false
  *
  */
-function isInsideCircle(/* circle, point */) {
-  throw new Error('Not implemented');
+function isInsideCircle(circle, point) {
+  const x = (point.x - circle.center.x) ** 2;
+  const y = (point.y - circle.center.y) ** 2;
+  const distance = Math.sqrt(x + y);
+
+  if (distance < circle.radius) return true;
+
+  return false;
 }
 
 /**
@@ -200,8 +206,13 @@ function findFirstSingleChar(/* str */) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  const openBracket = isStartIncluded ? '[' : '(';
+  const closeBracket = isEndIncluded ? ']' : ')';
+  const smaller = Math.min(a, b);
+  const bigger = Math.max(a, b);
+
+  return `${openBracket}${smaller}, ${bigger}${closeBracket}`;
 }
 
 /**
@@ -280,8 +291,15 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  let number = num;
+  while (number > 9) {
+    number = number
+      .toString()
+      .split('')
+      .reduce((sum, acc) => sum + +acc, 0);
+  }
+  return number;
 }
 
 /**
@@ -329,8 +347,17 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  let res = '';
+  let number = num;
+
+  while (number > 0) {
+    const tmp = number % n;
+    res = tmp.toString() + res;
+    number = Math.floor(number / n);
+  }
+
+  return res;
 }
 
 /**
